@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: BSD-2-Clause
+
+flavor_dts_file-MP15 = stm32mp157f-m4_flash_trigger-mx.dts
+flavorlist-MP15 += $(flavor_dts_file-MP15)

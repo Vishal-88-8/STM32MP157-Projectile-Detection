@@ -1,0 +1,2 @@
+C:/stm_ws/M4_Flash_Trigger/Common/System/system_stm32mp1xx.c:154:6:SystemInit	4	static
+C:/stm_ws/M4_Flash_Trigger/Common/System/system_stm32mp1xx.c:224:6:SystemCoreClockUpdate	32	static

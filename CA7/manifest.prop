@@ -1,0 +1,5 @@
+MANIFEST_VERSION = openstlinux-6.6-yocto-scarthgap-mpu-v26.06.10
+KERNEL_DT = ./DeviceTree/M4_Flash_Trigger/kernel
+OPTEE_DT = ./DeviceTree/M4_Flash_Trigger/optee-os
+UBOOT_DT = ./DeviceTree/M4_Flash_Trigger/u-boot
+TFA_DT = ./DeviceTree/M4_Flash_Trigger/tf-a
