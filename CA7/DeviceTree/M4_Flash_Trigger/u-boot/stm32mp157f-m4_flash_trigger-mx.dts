@@ -189,7 +189,7 @@
 
 	m4_tim5_pins_mx: m4_tim5_mx-0 {
 		pins {
-			pinmux = <STM32_PINMUX('H', 10, RSVD)>, /* TIM5_CH1 */
+			pinmux = <STM32_PINMUX('A', 0, RSVD)>, /* TIM5_CH1 */
 					 <STM32_PINMUX('H', 11, RSVD)>; /* TIM5_CH2 */
 		};
 	};

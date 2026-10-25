@@ -26,8 +26,6 @@
 #include "shared_ringbuffer.h"
 /* USER CODE END Includes */
 
-/* USER CODE END Includes */
-
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
@@ -37,9 +35,6 @@
 /* USER CODE BEGIN PD */
 
 /* USER CODE END PD */
-/* Private variables ---------------------------------------------------------*/
-TIM_HandleTypeDef htim5;
-
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
@@ -53,7 +48,8 @@ volatile shared_ringbuffer_t * const shared_buf = (shared_ringbuffer_t *) SHARED
 TIM_HandleTypeDef htim5;
 
 /* USER CODE BEGIN PV */
-
+/* Map pointer directly to physical SRAM3 base address (0x10040000) */
+//volatile shared_ringbuffer_t * const shared_buf = (shared_ringbuffer_t *) SHARED_SRAM_BASE_ADDR;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -85,7 +81,6 @@ int main(void)
 	/* USER CODE BEGIN 1 */
 	  /* Enable CP10 and CP11 Full Access for Cortex-M4 hardware FPU */
 	  SCB->CPACR |= ((3UL << 10*2) | (3UL << 11*2));
-	  /* USER CODE END 1 */
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -123,7 +118,6 @@ int main(void)
     /* 2. Start TIM5 Input Capture Interrupts on Channel 1 (PH10) and Channel 2 (PH11) */
     HAL_TIM_IC_Start_IT(&htim5, TIM_CHANNEL_1);
     HAL_TIM_IC_Start_IT(&htim5, TIM_CHANNEL_2);
-    /* USER CODE END 2 */
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -131,11 +125,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  // Fire a simulated IR projectile event every 2 seconds
-	      Trigger_Software_Test_Event();
 
-	      // Simple software delay loop (~2 seconds)
-	      HAL_Delay(2000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -235,7 +225,7 @@ static void MX_TIM5_Init(void)
   htim5.Instance = TIM5;
   htim5.Init.Prescaler = 0;
   htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim5.Init.Period = 4294967295;
+  htim5.Init.Period = 0xFFFFFFFF;
   htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim5) != HAL_OK)
@@ -257,7 +247,7 @@ static void MX_TIM5_Init(void)
   {
     Error_Handler();
   }
-  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
   sConfigIC.ICFilter = 0;
@@ -265,6 +255,7 @@ static void MX_TIM5_Init(void)
   {
     Error_Handler();
   }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
   if (HAL_TIM_IC_ConfigChannel(&htim5, &sConfigIC, TIM_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
@@ -291,6 +282,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(FLASH_OUT_GPIO_Port, FLASH_OUT_Pin, GPIO_PIN_RESET);
