@@ -47,9 +47,9 @@
 /* USER CODE BEGIN PV */
 /* USER CODE BEGIN PV */
 extern volatile shared_ringbuffer_t * const shared_buf;
-static uint32_t trigger_counter = 0;
+//static uint32_t trigger_counter = 0;
 //static uint32_t current_pps_tick = 0;
-static uint32_t pps_seq_counter = 0;
+//static uint32_t pps_seq_counter = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -219,49 +219,3 @@ void TIM5_IRQHandler(void)
 
   /* USER CODE END TIM5_IRQn 1 */
 }
-
-/* USER CODE BEGIN 1 */
-/* USER CODE BEGIN 1 */
-extern TIM_HandleTypeDef htim5;
-
-static uint32_t pps_prev = 0;    /* T_k   : previous PPS edge */
-static uint32_t pps_curr = 0;    /* T_k+1 : latest PPS edge   */
-
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
-{
-  if (htim->Instance != TIM5) return;
-
-  if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)        /* PPS reference */
-  {
-    pps_prev = pps_curr;
-    pps_curr = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_2);
-    pps_seq_counter++;
-  }
-  else if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)   /* IR trigger */
-  {
-    uint32_t t_event = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
-
-    uint32_t w    = shared_buf->write_idx;
-    uint32_t next = (w + 1U) % RINGBUFFER_CAPACITY;
-
-    if (next == shared_buf->read_idx)                   /* buffer full */
-    {
-      shared_buf->overflow_count++;
-      return;
-    }
-
-    timestamp_record_t *r = (timestamp_record_t *)&shared_buf->records[w];
-    r->trigger_id    = trigger_counter++;
-    r->event_type    = EVENT_TYPE_IR_TRIGGER;
-    r->t_event_ticks = t_event;
-    r->t_k_ticks     = pps_prev;
-    r->t_k1_ticks    = pps_curr;
-    r->pps_sequence  = pps_seq_counter;
-    r->flags         = STATUS_FLAG_VALID;
-
-    __DMB();                         /* record must be visible before index moves */
-    shared_buf->write_idx = next;
-  }
-}
-/* USER CODE END 1 */
-/* USER CODE END 1 */

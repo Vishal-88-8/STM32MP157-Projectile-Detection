@@ -61,8 +61,8 @@ all: main-build
 main-build: M4_Flash_Trigger_CM4.elf secondary-outputs
 
 # Tool invocations
-M4_Flash_Trigger_CM4.elf M4_Flash_Trigger_CM4.map: $(OBJS) $(USER_OBJS) C:\stm_ws\M4_Flash_Trigger\CM4\STM32MP157FACX_RAM.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "M4_Flash_Trigger_CM4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\stm_ws\M4_Flash_Trigger\CM4\STM32MP157FACX_RAM.ld" --specs=nosys.specs -Wl,-Map="M4_Flash_Trigger_CM4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+M4_Flash_Trigger_CM4.elf M4_Flash_Trigger_CM4.map: $(OBJS) $(USER_OBJS) C:\Users\saivi\STM32MP157-Projectile-Detection\CM4\STM32MP157FACX_RAM.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "M4_Flash_Trigger_CM4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\saivi\STM32MP157-Projectile-Detection\CM4\STM32MP157FACX_RAM.ld" --specs=nosys.specs -Wl,-Map="M4_Flash_Trigger_CM4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

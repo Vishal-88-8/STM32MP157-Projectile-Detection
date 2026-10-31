@@ -1,5 +1,5 @@
 Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_pwr.o: \
- C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr.c \
+ C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr.c \
  ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal.h \
  ../Core/Inc/stm32mp1xx_hal_conf.h \
  ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal_rcc.h \

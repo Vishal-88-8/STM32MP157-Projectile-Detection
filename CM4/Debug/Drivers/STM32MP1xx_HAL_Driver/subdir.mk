@@ -5,20 +5,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_cortex.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_dma.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_dma_ex.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_exti.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_gpio.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_hsem.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_mdma.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr_ex.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_rcc.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_rcc_ex.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_tim.c \
-C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_tim_ex.c 
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_cortex.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_dma.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_dma_ex.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_exti.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_gpio.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_hsem.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_mdma.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr_ex.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_rcc.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_rcc_ex.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_tim.c \
+C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_tim_ex.c 
 
 OBJS += \
 ./Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal.o \
@@ -54,33 +54,33 @@ C_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_cortex.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_cortex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_cortex.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_cortex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_dma.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_dma.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_dma.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_dma.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_dma_ex.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_dma_ex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_dma_ex.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_dma_ex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_exti.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_exti.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_exti.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_exti.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_gpio.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_gpio.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_gpio.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_gpio.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_hsem.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_hsem.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_hsem.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_hsem.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_mdma.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_mdma.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_mdma.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_mdma.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_pwr.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_pwr.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_pwr_ex.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr_ex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_pwr_ex.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_pwr_ex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_rcc.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_rcc.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_rcc.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_rcc.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_rcc_ex.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_rcc_ex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_rcc_ex.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_rcc_ex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_tim.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_tim.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_tim.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_tim.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
-Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_tim_ex.o: C:/stm_ws/M4_Flash_Trigger/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_tim_ex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
+Drivers/STM32MP1xx_HAL_Driver/stm32mp1xx_hal_tim_ex.o: C:/Users/saivi/STM32MP157-Projectile-Detection/Drivers/STM32MP1xx_HAL_Driver/Src/stm32mp1xx_hal_tim_ex.c Drivers/STM32MP1xx_HAL_Driver/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DCORE_CM4 -DUSE_HAL_DRIVER -DSTM32MP157Fxx -c -I../Core/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc -I../../Drivers/STM32MP1xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include -I../../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 
 clean: clean-Drivers-2f-STM32MP1xx_HAL_Driver
