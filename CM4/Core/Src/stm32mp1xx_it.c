@@ -212,7 +212,17 @@ void SysTick_Handler(void)
 void TIM5_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM5_IRQn 0 */
-
+  /* Ultra-low latency fast path (< 100 ns):
+   * If the interrupt was caused by the IR trigger channel, raise the flash trigger pin IMMEDIATELY
+   * without waiting for the HAL_TIM_IRQHandler callback cascade. */
+#if (TRIG_CH == 1)
+  if (TIM5->SR & TIM_SR_CC1IF)
+#else
+  if (TIM5->SR & TIM_SR_CC2IF)
+#endif
+  {
+    FLASH_OUT_GPIO_Port->BSRR = (uint32_t)FLASH_OUT_Pin;
+  }
   /* USER CODE END TIM5_IRQn 0 */
   HAL_TIM_IRQHandler(&htim5);
   /* USER CODE BEGIN TIM5_IRQn 1 */

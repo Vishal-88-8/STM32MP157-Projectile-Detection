@@ -61,7 +61,8 @@ void Error_Handler(void);
 #define FLASH_OUT_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
-
+#define TRIG_CH             1   /* 1: IR trigger on PA0 (TIM5_CH1, CN17 pin 1) [Default]
+                                 * 2: IR trigger on PH11 (TIM5_CH2, CN7 pin 31) */
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

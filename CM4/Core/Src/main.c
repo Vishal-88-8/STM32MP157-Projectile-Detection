@@ -40,13 +40,15 @@
 #define HOLDOUT_PULSE_US    1000U    /* Hold-Out pulse width               */
 #define DEADTIME_US         1000U    /* ignore triggers after an accepted one */
 
-/* Which TIM5 channel carries the IR trigger?
- *   2 -> trigger on TIM5_CH2 (PH11, CN7 pin 31), PPS on TIM5_CH1 (PA0)
- *   1 -> trigger on TIM5_CH1 (PA0),               PPS on TIM5_CH2 (PH11)   */
-#define TRIG_CH             2
+/* TRIG_CH is also declared in main.h:
+ *   1 -> trigger on TIM5_CH1 (PA0, CN17 pin 1 / Arduino A0) [Default]
+ *   2 -> trigger on TIM5_CH2 (PH11, CN7 pin 31), PPS on TIM5_CH1 (PA0) */
+#ifndef TRIG_CH
+#define TRIG_CH             1
+#endif
 
-#define TRIG_POLARITY       TIM_INPUTCHANNELPOLARITY_RISING
-#define PPS_POLARITY        TIM_INPUTCHANNELPOLARITY_FALLING
+#define TRIG_POLARITY       TIM_INPUTCHANNELPOLARITY_FALLING  /* Active-low IR curtain beam break */
+#define PPS_POLARITY        TIM_INPUTCHANNELPOLARITY_RISING   /* 1 Hz PPS reference rising edge */
 #define IC_FILTER           0U
 
 /* Hold-Out output pin. Uncomment and set once you confirm which MCU pin sits
@@ -61,14 +63,16 @@
 #define HOLDIN_PIN          GPIO_PIN_15
 
 /* Bench self-test: fires a software trigger every N ms (0 = off).
- * Handy with only the board connected; keep 0 during real runs.             */
-#define SELFTEST_PERIOD_MS  0U
+ * 2000U fires a heartbeat test event every 2 seconds for bench testing with A7;
+ * Set to 0U when taking oscilloscope measurements with real signal generator. */
+#define SELFTEST_PERIOD_MS  2000U
 /* ========================================================================= */
 
 /* 1 = records are published to the A7 only after the NEXT PPS edge (T_k+1)
- *     arrives, so the daemon can interpolate. Needs a real PPS input.
- * 0 = publish immediately (t_k1 = 0, VALID flag clear) - bench use without PPS */
-#define PPS_REQUIRED        1
+ *     arrives, so the daemon can interpolate. Needs a continuous PPS input.
+ * 0 = publish immediately (bench mode: write_idx advances on every trigger).
+ *     Vital for bench testing so A7 sees records without external PPS! */
+#define PPS_REQUIRED        0
 
 #if (TRIG_CH == 2)
 #define TRIG_CHANNEL        TIM_CHANNEL_2
@@ -178,6 +182,18 @@ int main(void)
   shared_buf->write_idx      = 0;
   shared_buf->read_idx       = 0;
   shared_buf->overflow_count = 0;
+
+  for (uint32_t i = 0; i < RINGBUFFER_CAPACITY; i++)
+  {
+    shared_buf->records[i].trigger_id    = 0;
+    shared_buf->records[i].event_type    = 0;
+    shared_buf->records[i].t_event_ticks = 0;
+    shared_buf->records[i].t_k_ticks     = 0;
+    shared_buf->records[i].t_k1_ticks    = 0;
+    shared_buf->records[i].pps_sequence  = 0;
+    shared_buf->records[i].flags         = 0;
+    shared_buf->records[i].reserved      = 0;
+  }
 
   /* Apply trigger/PPS polarity, then start both captures with interrupts */
   App_ConfigCapture();
@@ -453,11 +469,13 @@ static void ring_push(uint32_t t_event, uint32_t type)
   shared_buf->records[w].t_k_ticks     = last_pps_tick;
   shared_buf->records[w].t_k1_ticks    = 0;
   shared_buf->records[w].pps_sequence  = pps_seq;
-  shared_buf->records[w].flags         = 0;
+  shared_buf->records[w].flags         = have_pps ? STATUS_FLAG_VALID : 0;
   shared_buf->records[w].reserved      = 0;
   pend_w = next;
 
 #if !PPS_REQUIRED
+  /* Immediate publish mode: mark record valid so A7 daemon consumes it right away */
+  shared_buf->records[w].flags        |= STATUS_FLAG_VALID;
   __DMB();
   shared_buf->write_idx = pend_w;
 #endif
@@ -486,9 +504,11 @@ static void on_trigger(uint32_t t_event)
   uint32_t type = test_pending ? EVENT_TYPE_TEST : EVENT_TYPE_IR_TRIGGER;
   test_pending = 0;
 
-  /* Dead-time gate: ignore anything within DEADTIME_US of the last accepted one */
-  if (have_last && ((int32_t)(t_event - last_accept) < (int32_t)US_TO_TICKS(DEADTIME_US)))
+  /* Dead-time gate: ignore anything within DEADTIME_US of the last accepted one.
+   * Unsigned modulo-2^32 subtraction handles counter rollover correctly. */
+  if (have_last && ((uint32_t)(t_event - last_accept) < US_TO_TICKS(DEADTIME_US)))
   {
+    FLASH_OFF();
     dropped_count++;
     return;
   }
