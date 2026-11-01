@@ -1,5 +1,4 @@
-Core/Src/stm32mp1xx_it.o: ../Core/Src/stm32mp1xx_it.c \
- ../Core/Inc/shared_ringbuffer.h ../Core/Inc/main.h \
+Core/Src/stm32mp1xx_it.o: ../Core/Src/stm32mp1xx_it.c ../Core/Inc/main.h \
  ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal.h \
  ../Core/Inc/stm32mp1xx_hal_conf.h \
  ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal_rcc.h \
@@ -25,8 +24,7 @@ Core/Src/stm32mp1xx_it.o: ../Core/Src/stm32mp1xx_it.c \
  ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal_pwr_ex.h \
  ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal_tim.h \
  ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal_tim_ex.h \
- ../Core/Inc/stm32mp1xx_it.h
-../Core/Inc/shared_ringbuffer.h:
+ ../Core/Inc/stm32mp1xx_it.h ../Core/Inc/shared_ringbuffer.h
 ../Core/Inc/main.h:
 ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal.h:
 ../Core/Inc/stm32mp1xx_hal_conf.h:
@@ -54,3 +52,4 @@ Core/Src/stm32mp1xx_it.o: ../Core/Src/stm32mp1xx_it.c \
 ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal_tim.h:
 ../../Drivers/STM32MP1xx_HAL_Driver/Inc/stm32mp1xx_hal_tim_ex.h:
 ../Core/Inc/stm32mp1xx_it.h:
+../Core/Inc/shared_ringbuffer.h:

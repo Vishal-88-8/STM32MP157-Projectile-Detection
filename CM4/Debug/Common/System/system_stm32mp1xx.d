@@ -1,5 +1,5 @@
 Common/System/system_stm32mp1xx.o: \
- C:/stm_ws/M4_Flash_Trigger/Common/System/system_stm32mp1xx.c \
+ C:/Users/saivi/STM32MP157-Projectile-Detection/Common/System/system_stm32mp1xx.c \
  ../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include/stm32mp1xx.h \
  ../../Drivers/CMSIS/Device/ST/STM32MP1xx/Include/stm32mp157fxx_cm4.h \
  ../../Drivers/CMSIS/Include/core_cm4.h \

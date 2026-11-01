@@ -16,12 +16,16 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-#include "shared_ringbuffer.h"
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32mp1xx_it.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+/* USER CODE BEGIN Includes */
+#include "shared_ringbuffer.h"
+/* USER CODE END Includes */
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,10 +47,9 @@
 /* USER CODE BEGIN PV */
 /* USER CODE BEGIN PV */
 extern volatile shared_ringbuffer_t * const shared_buf;
-static uint32_t trigger_counter = 0;
-static uint32_t current_pps_tick = 0;
-static uint32_t pps_seq_counter = 0;
-/* USER CODE END PV */
+//static uint32_t trigger_counter = 0;
+//static uint32_t current_pps_tick = 0;
+//static uint32_t pps_seq_counter = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -208,52 +211,11 @@ void SysTick_Handler(void)
   */
 void TIM5_IRQHandler(void)
 {
-    /* Channel 1 Interrupt: IR Sensor Projectile Detection (PH10) */
-    if (TIM5->SR & TIM_SR_CC1IF)
-    {
-        /* 1. INSTANT XENON FLASH PULSE (PE2 HIGH) - Zero Latency Register Access */
-        PE2_GPIO_Port->BSRR = PE2_Pin;
+  /* USER CODE BEGIN TIM5_IRQn 0 */
 
-        /* 2. Read captured 32-bit tick count (~4.78 ns tick resolution) */
-        uint32_t capture_tick = TIM5->CCR1;
+  /* USER CODE END TIM5_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim5);
+  /* USER CODE BEGIN TIM5_IRQn 1 */
 
-        /* 3. Hold pulse HIGH for ~70 us camera flash trigger, then pull PE2 LOW */
-        for (volatile int i = 0; i < 1500; i++) { __NOP(); }
-        PE2_GPIO_Port->BSRR = (uint32_t)PE2_Pin << 16;
-
-        /* 4. Write record directly to Koushik's Shared SRAM3 Ring Buffer */
-        uint32_t w_idx = shared_buf->write_idx;
-        uint32_t next_w = (w_idx + 1) % RINGBUFFER_CAPACITY;
-
-        if (next_w != shared_buf->read_idx)
-        {
-            volatile timestamp_record_t *rec = &shared_buf->records[w_idx];
-
-            rec->trigger_id = ++trigger_counter;
-            rec->event_type = EVENT_TYPE_IR_TRIGGER;
-            rec->t_event_ticks = capture_tick;
-            rec->t_k_ticks = current_pps_tick;
-            rec->pps_sequence = pps_seq_counter;
-            rec->flags = STATUS_FLAG_VALID;
-
-            shared_buf->write_idx = next_w;
-        }
-        else
-        {
-            shared_buf->overflow_count++;
-        }
-
-        /* Clear Channel 1 Interrupt Flag */
-        TIM5->SR = ~TIM_SR_CC1IF;
-    }
-
-    /* Channel 2 Interrupt: 1 Hz PPS Clock Sync Pulse (PH11) */
-    if (TIM5->SR & TIM_SR_CC2IF)
-    {
-        current_pps_tick = TIM5->CCR2;
-        pps_seq_counter++;
-
-        /* Clear Channel 2 Interrupt Flag */
-        TIM5->SR = ~TIM_SR_CC2IF;
-    }
+  /* USER CODE END TIM5_IRQn 1 */
 }
